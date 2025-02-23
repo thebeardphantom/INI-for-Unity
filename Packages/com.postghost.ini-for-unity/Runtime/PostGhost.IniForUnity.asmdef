@@ -1,0 +1,16 @@
+{
+    "name": "PostGhost.IniForUnity",
+    "rootNamespace": "PostGhost.IniForUnity",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [
+        "INIFileParser.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

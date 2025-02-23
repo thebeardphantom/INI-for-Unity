@@ -1,0 +1,16 @@
+{
+    "name": "PostGhost.IniForUnity.Editor",
+    "rootNamespace": "PostGhost.IniForUnity.Editor",
+    "references": [
+        "GUID:0f01b9a413343d04696ac0af4f9d107d"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
