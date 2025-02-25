@@ -69,16 +69,16 @@ namespace PostGhost.IniForUnity.Editor
         public string GetContents()
         {
             var iniDataFormatter = new DefaultIniDataFormatter();
-            return _iniAsset.IniData.ToString(iniDataFormatter);
+            return _iniAsset.RawData.ToString(iniDataFormatter);
         }
 
         public void SetContents(string contents)
         {
             _itemSource.Clear();
-            IEnumerable<SectionKeyData> keyDatas = _iniAsset.IniData.Global.Select(kd => new SectionKeyData(null, kd.KeyName, kd.Value));
+            IEnumerable<SectionKeyData> keyDatas = _iniAsset.RawData.Global.Select(kd => new SectionKeyData(null, kd.KeyName, kd.Value));
             keyDatas = keyDatas.Concat(
                 _iniAsset
-                    .IniData
+                    .RawData
                     .Sections
                     .SelectMany(s => s.Keys.Select(kd => new SectionKeyData(s.SectionName, kd.KeyName, kd.Value))));
             IEnumerable<TreeViewItemData<SectionKeyData>> treeViewItems = keyDatas
