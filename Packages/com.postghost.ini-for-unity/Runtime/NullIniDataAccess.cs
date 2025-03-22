@@ -8,7 +8,7 @@ namespace PostGhost.IniForUnity
 
         public KeyDataCollection this[string sectionName] => null;
 
-        public bool TryGetValue<T>(string keyName, out T value)
+        public bool TryGetGlobalValue<T>(string keyName, out T value)
         {
             value = default;
             return false;

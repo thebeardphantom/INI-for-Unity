@@ -6,10 +6,8 @@ namespace PostGhost.IniForUnity
     {
         KeyDataCollection this[string sectionName] { get; }
 
-        bool TryGetValue<T>(string keyName, out T value);
+        bool TryGetGlobalValue<T>(string keyName, out T value);
 
         bool TryGetValue<T>(string sectionName, string keyName, out T value);
-
-        bool TryConvertFromString<T>(string valueString, out T value);
     }
 }

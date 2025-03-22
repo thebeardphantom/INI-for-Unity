@@ -1,4 +1,5 @@
 ﻿using IniParser.Model;
+using IniParser.Model.Configuration;
 using IniParser.Parser;
 using UnityEngine;
 
@@ -19,12 +20,13 @@ namespace PostGhost.IniForUnity
         {
             var iniAsset = CreateInstance<IniAsset>();
             iniAsset.FileContents = fileContents;
+            iniAsset.Repopulate();
             return iniAsset;
         }
 
-        public bool TryGetValue<T>(string keyName, out T value)
+        public bool TryGetGlobalValue<T>(string keyName, out T value)
         {
-            return _iniDataAccess.TryGetValue(keyName, out value);
+            return _iniDataAccess.TryGetGlobalValue(keyName, out value);
         }
 
         public bool TryGetValue<T>(string sectionName, string keyName, out T value)
@@ -32,23 +34,24 @@ namespace PostGhost.IniForUnity
             return _iniDataAccess.TryGetValue(sectionName, keyName, out value);
         }
 
-        public bool TryConvertFromString<T>(string valueString, out T value)
-        {
-            return _iniDataAccess.TryConvertFromString(valueString, out value);
-        }
-
-        void ISerializationCallbackReceiver.OnBeforeSerialize() { }
-
-        void ISerializationCallbackReceiver.OnAfterDeserialize()
+        private void Repopulate()
         {
             if (string.IsNullOrWhiteSpace(FileContents))
             {
                 return;
             }
 
-            var parser = new IniDataParser();
+            IniParserConfiguration iniParserConfiguration = IniDataUtility.ParserConfigurationFactory.Invoke();
+            var parser = new IniDataParser(iniParserConfiguration);
             RawData = parser.Parse(FileContents);
             _iniDataAccess = new IniDataAccess(RawData);
+        }
+
+        void ISerializationCallbackReceiver.OnBeforeSerialize() { }
+
+        void ISerializationCallbackReceiver.OnAfterDeserialize()
+        {
+            Repopulate();
         }
     }
 }
